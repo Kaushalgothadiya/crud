@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax CRUD Example</title>
+</head>
+<body>
+    <button onclick="createItem()">Create Item</button>
+    <button onclick="readItem(1)">Read Item</button>
+    <button onclick="updateItem(1)">Update Item</button>
+    <button onclick="deleteItem(1)">Delete Item</button>
+
+    <script>
+        function createItem() {
+            var data = 'Your data here';
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/create/', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.send('data=' + data);
+        }
+
+        function readItem(itemId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/read/' + itemId + '/', true);
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.send();
+        }
+
+        function updateItem(itemId) {
+            var data = 'Updated data';
+            var xhr = new XMLHttpRequest();
+            xhr.open('PUT', '/api/update/' + itemId + '/', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.send('data=' + data);
+        }
+
+        function deleteItem(itemId) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('DELETE', '/api/delete/' + itemId + '/', true);
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    console.log(JSON.parse(xhr.responseText));
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
